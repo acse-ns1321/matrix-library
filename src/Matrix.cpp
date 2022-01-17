@@ -31,7 +31,7 @@ Matrix::~Matrix(){
 
 void Matrix::printValues(){
     // ------Description-----------------------------
-    // Print flattened array just as values
+    // Print flattened 1-D array just as values
     //-----------------------------------------------
 
     std::cout << "Printing out values:" << std::endl;
@@ -43,7 +43,7 @@ void Matrix::printValues(){
 
 void Matrix::printMatrix(){
     // ----Description-----------------------------------
-    // Print array values just as defined 
+    // Print array values as defined but
     // in the form of a matrix
     // ---------------------------------------------------
 
@@ -60,7 +60,7 @@ void Matrix::printMatrix(){
 void Matrix::matMatMult(Matrix &mat_left, Matrix &output){
     // ----Description--------------------------------
     // Computes Matrix - Matrix Multiplication
-    // output = mat_left * output
+    // output = mat_left * this
     //-----------------------------------------------
 
     // ---- Note -------------------------------------
@@ -69,11 +69,19 @@ void Matrix::matMatMult(Matrix &mat_left, Matrix &output){
     // -----------------------------------------------
 
     // Check dimension match
-    //-----
-    //
-    //-----
-    if (this->rows||
-        this->cols||
+    //-------------------------------------------------
+    // if output(r3*c3) = mat_left(r1*c1) * this(r2*c2)
+    // then c3 == c2
+    // and r3 == r1 and r2 == r1
+    //------------------------------------------------- 
+
+
+    // For mat_left
+    if (this->cols != output.cols || this->rows != mat_left.cols || mat_left.rows != output.rows)
+        {
+            std::cerr << "Error!!Input dimensions dont match!!!"<< std::endl;
+            return;
+         }
         ||){
 
         }
@@ -85,11 +93,16 @@ void Matrix::matMatMult(Matrix &mat_left, Matrix &output){
         output.preallocated = true;
     }
 
+    // Set values to zero before hand
+    for (int i = 0; i < output.size_of_values; i++){
+        output.values[i] = 0;
+    }
+
     // Calculating Matrix-Matrix Multiplication
-    for(int i = 0; i < this->rows; i++){
-        for(int k = 0; k < this->cols; k++){
-            for(int j = 0; j < mat_left.cols; j++){
-                output.values[i*output.cols + j] +=
+    for(int i = 0; i < mat_left.rows; i++){
+        for(int j = 0; j < this->cols; j++){
+            for(int k = 0; k < mat_left.cols; k++){
+                output.values[i*this->cols + j] +=
                     this->values[i * this->]*
                     mat_left.values[k * mat_left.cols +j]
             }
