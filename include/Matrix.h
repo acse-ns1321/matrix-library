@@ -1,6 +1,4 @@
-# pragma once
-
-
+#pragma once
 class Matrix {
 
     // A CLASS THAT DEFINES A MATRIX AND ITS OPERATIONS
@@ -39,7 +37,7 @@ class Matrix {
     // Numerics library gives access to users to improve speed
     // ------------------------------------------------------------
     int rows = -1;
-    int cols = -1
+    int cols = -1;
 
     // Initialize null pointer for the values
     // ---- Note --------------------------------------------------
@@ -47,7 +45,7 @@ class Matrix {
     // i.e. its expensive!
     // This is defined as Row Major Ordering
     // -------------------------------------------------------------
-    double *values = nullptr;
+    double* values = NULL;
 
     private:
     // ---- Note ----------------------------------------------------
