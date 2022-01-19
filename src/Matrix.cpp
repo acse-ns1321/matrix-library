@@ -1,26 +1,26 @@
 #include <iostream>
 
-#include "../include/Matrix.h"
+#include "include/Matrix.h"
 
-
-Matrix::Matrix(int rows, int cols, bool preallocate): cols(cols), rows(rows), size_of_values(rows*cols), preallocated(preallocate){
+template<class T>
+Matrix<T>::Matrix(int rows, int cols, bool preallocate): cols(cols), rows(rows), size_of_values(rows*cols), preallocated(preallocate){
     //-----Description------------------------------------------
     // Default Constructor 1  of the class
     //----------------------------------------------------------
 
     // If memory is preallocated, initialize it to a new pointer
     if(this->preallocated){
-        this->values = new double[size_of_values];
+        this->values = new T[size_of_values];
     }
 };
-
-Matrix::Matrix(int rows, int cols, double *values_ptr): cols(cols), rows(rows), size_of_values(rows*cols), values(values_ptr){
+template<class T>
+Matrix<T>::Matrix(int rows, int cols, T *values_ptr): cols(cols), rows(rows), size_of_values(rows*cols), values(values_ptr){
     //-----Description------------------------------------------
     // Default Constructor 2  of the class
     //----------------------------------------------------------
 }
-
-Matrix::~Matrix(){
+template<class T>
+Matrix<T>::~Matrix(){
     // ------Description-----------------------------
     // Destructor to prevent memory leaks
     //-----------------------------------------------
@@ -30,7 +30,8 @@ Matrix::~Matrix(){
     }
 }
 
-void Matrix::printValues(){
+template<class T>
+void Matrix<T>::printValues(){
     // ------Description-----------------------------
     // Print flattened 1-D array just as values
     //-----------------------------------------------
@@ -42,7 +43,8 @@ void Matrix::printValues(){
     std::cout<<std::endl;
 }
 
-void Matrix::printMatrix(){
+template<class T>
+void Matrix<T>::printMatrix(){
     // ----Description-----------------------------------
     // Print array values as defined but
     // in the form of a matrix
@@ -58,7 +60,8 @@ void Matrix::printMatrix(){
     std::cout<<std::endl;
 }
 
-void Matrix::matMatMult(Matrix &mat_left, Matrix &output){
+template<class T>
+void Matrix<T>::matMatMult(Matrix &mat_left, Matrix &output){
     // ----Description--------------------------------
     // Computes Matrix - Matrix Multiplication
     // output = mat_left * this

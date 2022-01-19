@@ -1,4 +1,7 @@
 #pragma once
+
+template<class T>
+
 class Matrix {
 
     // A CLASS THAT DEFINES A MATRIX AND ITS OPERATIONS
@@ -12,7 +15,7 @@ class Matrix {
     // ----Second Default Constructor ----------------------------  
     // this constructor is called when we have allocated
     // memory outside
-    Matrix(int rows, int cols, double *value_ptr);
+    Matrix(int rows, int cols, T *value_ptr);
 
     // The Class Destructor ---------------------------------------
     // that is invoked vvirtually by every instance of the class
@@ -29,7 +32,7 @@ class Matrix {
     // Class method -----------------------------------------------
     // to multiply matrices
     // output = mat_left * this
-    virtual void matMatMult(Matrix &mat_left, Matrix &output);
+    void matMatMult(Matrix<T> &mat_left, Matrix<T> &output);
 
     // Initialize Class Variables ---------------------------------
     // rows and columns to be publicly accessed 
@@ -45,7 +48,13 @@ class Matrix {
     // i.e. its expensive!
     // This is defined as Row Major Ordering
     // -------------------------------------------------------------
-    double* values = NULL;
+    T* values = NULL;
+
+    // Accessible by a subclass/child class
+    protected:
+    // If values pointer is set or not
+    bool preallocated = false;
+    int size_of_values = -1;
 
     private:
     // ---- Note ----------------------------------------------------
@@ -55,8 +64,7 @@ class Matrix {
     // so the user assumes the resizing is slow, when infact the 
     // whole matrix is being created and copied again!
     // ---------------------------------------------------------------
-    int size_of_values = -1;
-    // If values pointer is set or not
-    bool preallocated = false;
+    // int size_of_values = -1;//chnaged to proetced when creating CSR child class
+
 
 };

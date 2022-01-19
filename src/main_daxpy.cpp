@@ -30,10 +30,10 @@ int main(){
         y_vec[i] = i;
     }
 
-    // compute y = alpha*
-
+    // compute y = alpha * x + y
     daxpy(size_of_vector, alpha, x_vec, 1, y_vec, 2);
 
+    // print out the results
     for(int i = 0; i < size_of_vector * 2; i++){
         cout<< y_vec[i] << " ";
     }
